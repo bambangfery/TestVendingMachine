@@ -45,6 +45,17 @@
                 app:layout_constraintTop_toBottomOf="@+id/ivSnack" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Rp. 6.000"
+                android:textSize="14sp"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvStock"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -53,7 +64,7 @@
                 android:textStyle="italic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvName" />
+                app:layout_constraintTop_toBottomOf="@+id/tvPrice" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

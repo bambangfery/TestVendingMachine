@@ -1,5 +1,6 @@
-package com.bambang.vendingmachine.view.ui
+package com.bambang.vendingmachine.view.ui.pay
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,30 +10,35 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bambang.vendingmachine.R
 import com.bambang.vendingmachine.base.ListSnackViewModelFactory
+import com.bambang.vendingmachine.databinding.DetailSnackFragmentBinding
 import com.bambang.vendingmachine.databinding.ListSnackFragmentBinding
+import com.bambang.vendingmachine.databinding.PayDetailFragmentBinding
 import com.bambang.vendingmachine.model.Snack
+import com.bambang.vendingmachine.view.ui.ListSnackFragmentDirections
 import com.bambang.vendingmachine.view.ui.adapter.ListSnackAdapter
 import com.bambang.vendingmachine.viewmodel.ListSnackViewModel
+import com.bumptech.glide.Glide
 
-class ListSnackFragment : Fragment() {
+class PayDetailFragment : Fragment() {
 
-    lateinit var binding: ListSnackFragmentBinding
-    private lateinit var mAdapter: ListSnackAdapter
-    private lateinit var lManager: GridLayoutManager
+    lateinit var binding: PayDetailFragmentBinding
     private val viewModelFactory = ListSnackViewModelFactory()
     private val viewModel: ListSnackViewModel by activityViewModels(
         factoryProducer = { viewModelFactory })
+    private val args: PayDetailFragmentArgs by navArgs()
+    private var count: Int = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
-            inflater, R.layout.list_snack_fragment,
+            inflater, R.layout.pay_detail_fragment,
             container, false
         )
         binding.lifecycleOwner = this
@@ -46,38 +52,25 @@ class ListSnackFragment : Fragment() {
         bindingViewEvent()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initView() {
-        mAdapter = ListSnackAdapter(listener)
-        lManager = GridLayoutManager(context,3,RecyclerView.VERTICAL,false)
-        viewModel.setListSnackValue()
+        binding.tvTotal.text = args.snackItem.titleSnack+" x "+args.count
+        binding.tvTotalValue.text = "Rp."+ args.snackItem.stockSnack.toString()
     }
 
 
     private fun bindViewModel() {
-        viewModel.listSnack.observe(viewLifecycleOwner, Observer {
-            mAdapter.refresh(it)
+        viewModel.textTotalSnack.observe(viewLifecycleOwner, Observer {
+                binding.tvTotalValue.text = "x $it"
         })
 
     }
 
     private fun bindingViewEvent() {
-        binding.rvSnackList.apply {
-            layoutManager = lManager
-            adapter = mAdapter
-        }
+        binding.btnPay.setOnClickListener {
 
-        binding.restock.setOnClickListener {
-            viewModel.setListSnackValue()
         }
     }
 
-    private val listener = object : ListSnackAdapter.SnackListener {
-        override fun onClickedListener(item: Snack, position: Int) {
-            findNavController().navigate(
-                ListSnackFragmentDirections.actionListSnackFragmentToDetailSnackFragment(item)
-            )
-        }
-
-    }
 }
 

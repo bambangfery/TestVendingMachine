@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/pre_outbound_nav_graph"
+    android:id="@+id/list_snack_nav_graph"
     app:startDestination="@id/listSnackFragment">
 
     <fragment
@@ -11,8 +11,33 @@
         android:label="list_snack_fragment"
         tools:layout="@layout/list_snack_fragment">
         <action
-            android:id="@+id/action_preOutboundFragment_to_dialogFilterDate"
-            app:destination="@id/dialogFilterDate" />
+            android:id="@+id/action_listSnackFragment_to_detailSnackFragment"
+            app:destination="@id/detailSnackFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailSnackFragment"
+        android:name="com.bambang.vendingmachine.view.ui.detail.DetailSnackFragment"
+        android:label="DetailSnackFragment" >
+        <argument
+            android:name="snackItem"
+            app:argType="com.bambang.vendingmachine.model.Snack" />
+        <action
+            android:id="@+id/action_detailSnackFragment_to_listSnackFragment"
+            app:destination="@id/listSnackFragment" />
+        <action
+            android:id="@+id/action_detailSnackFragment_to_payDetailFragment"
+            app:destination="@id/payDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/payDetailFragment"
+        android:name="com.bambang.vendingmachine.view.ui.pay.PayDetailFragment"
+        android:label="PayDetailFragment" >
+        <argument
+            android:name="snackItem"
+            app:argType="com.bambang.vendingmachine.model.Snack" />
+        <argument
+            android:name="count"
+            app:argType="integer" />
     </fragment>
 
 </navigation>
