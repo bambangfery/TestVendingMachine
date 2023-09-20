@@ -31,7 +31,7 @@ class PayDetailFragment : Fragment() {
     private val viewModel: ListSnackViewModel by activityViewModels(
         factoryProducer = { viewModelFactory })
     private val args: PayDetailFragmentArgs by navArgs()
-    private var count: Int = 1
+    private var payment: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,18 +55,39 @@ class PayDetailFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun initView() {
         binding.tvTotal.text = args.snackItem.titleSnack+" x "+args.count
-        binding.tvTotalValue.text = "Rp."+ args.snackItem.stockSnack.toString()
+        binding.tvTotalValue.text = "Rp."+ args.snackItem.priceSnack!!*args.count
+        viewModel.textPriceSnack.value = 0
     }
 
 
     private fun bindViewModel() {
-        viewModel.textTotalSnack.observe(viewLifecycleOwner, Observer {
-                binding.tvTotalValue.text = "x $it"
+        viewModel.textPriceSnack.observe(viewLifecycleOwner, Observer {
+            binding.tvPayment.text = "Rp. $it"
         })
-
     }
 
     private fun bindingViewEvent() {
+        binding.btn2000.setOnClickListener {
+            payment+=2000
+            viewModel.textPriceSnack.value = payment
+
+        }
+        binding.btn5000.setOnClickListener {
+            payment += 5000
+            viewModel.textPriceSnack.value = payment
+        }
+        binding.btn10000.setOnClickListener {
+            payment += 10000
+            viewModel.textPriceSnack.value = payment
+        }
+        binding.btn20000.setOnClickListener {
+            payment += 20000
+            viewModel.textPriceSnack.value = payment
+        }
+        binding.btn50000.setOnClickListener {
+            payment += 50000
+            viewModel.textPriceSnack.value = payment
+        }
         binding.btnPay.setOnClickListener {
 
         }

@@ -13,7 +13,7 @@ class ListSnackViewModel : BaseListSnackViewModel(),
     private var job = SupervisorJob()
     override val coroutineContext: CoroutineContext = Dispatchers.Main + job
     val textTitleSnack = MutableLiveData<String>()
-    val textPriceSnack = MutableLiveData<String>()
+    val textPriceSnack = MutableLiveData<Int>()
     val textTotalSnack = MutableLiveData<Int>()
     val listSnack = MutableLiveData<ArrayList<Snack>>()
 

@@ -56,7 +56,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tvTotal" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvTotalValue2"
+            android:id="@+id/tvPayment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Rp. 0"
