@@ -12,8 +12,9 @@ class ListSnackViewModel : BaseListSnackViewModel(),
     CoroutineScope {
     private var job = SupervisorJob()
     override val coroutineContext: CoroutineContext = Dispatchers.Main + job
-    val textTitleSnack = MutableLiveData<String>()
+    val textChangeSnack = MutableLiveData<Int>()
     val textPriceSnack = MutableLiveData<Int>()
+    val textPaymentSnack = MutableLiveData<Int>()
     val textTotalSnack = MutableLiveData<Int>()
     val listSnack = MutableLiveData<ArrayList<Snack>>()
 
@@ -68,6 +69,10 @@ class ListSnackViewModel : BaseListSnackViewModel(),
 
         listSnack.value = listArray
 
+    }
+
+    fun setCountTotalPay(){
+        textChangeSnack.value = textPaymentSnack.value!! - textPriceSnack.value!!
     }
 
 }

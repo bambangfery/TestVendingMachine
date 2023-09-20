@@ -11,15 +11,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.bambang.vendingmachine.R
 import com.bambang.vendingmachine.base.ListSnackViewModelFactory
 import com.bambang.vendingmachine.databinding.DetailSnackFragmentBinding
-import com.bambang.vendingmachine.databinding.ListSnackFragmentBinding
-import com.bambang.vendingmachine.model.Snack
-import com.bambang.vendingmachine.view.ui.ListSnackFragmentDirections
-import com.bambang.vendingmachine.view.ui.adapter.ListSnackAdapter
 import com.bambang.vendingmachine.viewmodel.ListSnackViewModel
 import com.bumptech.glide.Glide
 
@@ -71,10 +65,11 @@ class DetailSnackFragment : Fragment() {
 
     private fun bindingViewEvent() {
         binding.btnPlus.setOnClickListener {
-            viewModel.textTotalSnack.value = ++count
+            if (count < args.snackItem.stockSnack!!)
+                viewModel.textTotalSnack.value = ++count
         }
         binding.btnMin.setOnClickListener {
-            if (count>1)
+            if (count > 1)
                 viewModel.textTotalSnack.value = --count
         }
         binding.btnBack.setOnClickListener {

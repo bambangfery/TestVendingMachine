@@ -47,9 +47,10 @@ class ListSnackFragment : Fragment() {
     }
 
     private fun initView() {
-        mAdapter = ListSnackAdapter(listener)
+        mAdapter = ListSnackAdapter(listener, requireActivity())
         lManager = GridLayoutManager(context,3,RecyclerView.VERTICAL,false)
-        viewModel.setListSnackValue()
+        if (viewModel.listSnack.value.isNullOrEmpty())
+            viewModel.setListSnackValue()
     }
 
 

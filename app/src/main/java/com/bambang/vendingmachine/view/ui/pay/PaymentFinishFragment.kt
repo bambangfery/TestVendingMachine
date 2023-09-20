@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -14,24 +13,23 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bambang.vendingmachine.R
 import com.bambang.vendingmachine.base.ListSnackViewModelFactory
-import com.bambang.vendingmachine.databinding.PayDetailFragmentBinding
+import com.bambang.vendingmachine.databinding.PaymentFinishFragmentBinding
 import com.bambang.vendingmachine.viewmodel.ListSnackViewModel
 
-class PayDetailFragment : Fragment() {
+class PaymentFinishFragment : Fragment() {
 
-    lateinit var binding: PayDetailFragmentBinding
+    lateinit var binding: PaymentFinishFragmentBinding
     private val viewModelFactory = ListSnackViewModelFactory()
     private val viewModel: ListSnackViewModel by activityViewModels(
         factoryProducer = { viewModelFactory })
-    private val args: PayDetailFragmentArgs by navArgs()
-    private var payment: Int = 0
+    private val args: PaymentFinishFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
-            inflater, R.layout.pay_detail_fragment,
+            inflater, R.layout.payment_finish_fragment,
             container, false
         )
         binding.lifecycleOwner = this
@@ -48,8 +46,6 @@ class PayDetailFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun initView() {
         binding.tvTotal.text = args.snackItem.titleSnack+" x "+args.count
-        viewModel.textPriceSnack.value = args.snackItem.priceSnack!!*args.count
-        viewModel.textPaymentSnack.value = 0
     }
 
 
@@ -63,39 +59,26 @@ class PayDetailFragment : Fragment() {
         })
 
         viewModel.textChangeSnack.observe(viewLifecycleOwner, Observer {
-            if (it <= 0)
-                Toast.makeText(context,"Kurang Bayar",Toast.LENGTH_SHORT).show()
-            else
-                findNavController().navigate(
-                   PayDetailFragmentDirections.actionPayDetailFragmentToPaymentFinishFragment(args.snackItem,
-                       viewModel.textTotalSnack.value!!)
-                )
+            binding.tvChangeSnack.text = "Rp. $it"
         })
     }
 
     private fun bindingViewEvent() {
-        binding.btn2000.setOnClickListener {
-            payment += 2000
-            viewModel.textPaymentSnack.value = payment
-        }
-        binding.btn5000.setOnClickListener {
-            payment += 5000
-            viewModel.textPaymentSnack.value = payment
-        }
-        binding.btn10000.setOnClickListener {
-            payment += 10000
-            viewModel.textPaymentSnack.value = payment
-        }
-        binding.btn20000.setOnClickListener {
-            payment += 20000
-            viewModel.textPaymentSnack.value = payment
-        }
-        binding.btn50000.setOnClickListener {
-            payment += 50000
-            viewModel.textPaymentSnack.value = payment
-        }
-        binding.btnPay.setOnClickListener {
-            viewModel.setCountTotalPay()
+
+        binding.btnBack.setOnClickListener {
+            viewModel.listSnack.value!!.forEach {
+                if (it.idSnack == args.snackItem.idSnack){
+                    it.stockSnack = it.stockSnack!!-args.count
+                }
+            }
+            findNavController().navigate(
+               PaymentFinishFragmentDirections.actionPaymentFinishFragmentToListSnackFragment()
+            )
+            viewModel.textChangeSnack.value = 0
+            viewModel.textPriceSnack.value = null
+            viewModel.textTotalSnack.value = null
+            viewModel.textPaymentSnack.value = null
+            println(viewModel.listSnack.value)
         }
     }
 

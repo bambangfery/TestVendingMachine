@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".view.ui.ListSnackFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginVertical="8dp"
+        android:layout_marginHorizontal="8dp">
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total bayar"
+            android:textSize="21sp"
+            android:textStyle="italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Biskuit x 1 "
+            android:textSize="21sp"
+            android:textStyle="italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTotalValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Rp. 20000"
+            android:textSize="21sp"
+            android:textStyle="italic"
+            android:gravity="right"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvTotal"
+            app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTotal2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pembayaran "
+            android:textSize="21sp"
+            android:textStyle="italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTotal" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPayment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Rp. 0"
+            android:textSize="21sp"
+            android:textStyle="italic"
+            android:gravity="right"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvTotal2"
+            app:layout_constraintTop_toBottomOf="@+id/tvTotal" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvChange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kembalian "
+            android:textSize="21sp"
+            android:textStyle="italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPayment" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivSnack"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:scaleType="centerInside"
+            android:background="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvChange"
+            app:layout_constraintTop_toBottomOf="@+id/tvPayment" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvChangeSnack"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Rp. 0"
+            android:textSize="21sp"
+            android:textStyle="italic"
+            android:gravity="right"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvChange"
+            app:layout_constraintTop_toBottomOf="@+id/tvPayment" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="kembali"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvChange" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

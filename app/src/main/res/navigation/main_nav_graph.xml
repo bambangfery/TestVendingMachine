@@ -38,6 +38,22 @@
         <argument
             android:name="count"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_payDetailFragment_to_paymentFinishFragment"
+            app:destination="@id/paymentFinishFragment" />
     </fragment>
-
+    <fragment
+        android:id="@+id/paymentFinishFragment"
+        android:name="com.bambang.vendingmachine.view.ui.pay.PaymentFinishFragment"
+        android:label="PaymentFinishFragment">
+        <argument
+            android:name="snackItem"
+            app:argType="com.bambang.vendingmachine.model.Snack" />
+        <argument
+            android:name="count"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_paymentFinishFragment_to_listSnackFragment"
+            app:destination="@id/listSnackFragment" />
+    </fragment>
 </navigation>

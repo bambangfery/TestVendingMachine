@@ -1,14 +1,16 @@
 package com.bambang.vendingmachine.view.ui.adapter
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bambang.vendingmachine.databinding.ItemListSnackBinding
 import com.bambang.vendingmachine.model.Snack
 import com.bumptech.glide.Glide
 
-class ListSnackAdapter(val listener: SnackListener) :
+class ListSnackAdapter(val listener: SnackListener, val context: Context) :
     RecyclerView.Adapter<ListSnackAdapter.SnackDetail>() {
 
     var list = arrayListOf<Snack>()
@@ -40,7 +42,10 @@ class ListSnackAdapter(val listener: SnackListener) :
                 .into(binding.ivSnack)
 
             holder.binding.clContainer.setOnClickListener {
-                listener.onClickedListener(item, position)
+                if (item.stockSnack!! > 0)
+                    listener.onClickedListener(item, position)
+                else
+                    Toast.makeText(context,"Stock Habis", Toast.LENGTH_SHORT).show()
             }
         }
     }

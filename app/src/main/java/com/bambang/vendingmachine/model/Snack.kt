@@ -9,5 +9,5 @@ data class Snack(
     val titleSnack: String? = null,
     val imgSnack: String? = null,
     val priceSnack: Int? = null,
-    val stockSnack: Int? = null,
+    var stockSnack: Int? = null,
 ):Parcelable
