@@ -87,10 +87,7 @@ class PaymentFinishFragment : Fragment() {
             findNavController().navigate(
                PaymentFinishFragmentDirections.actionPaymentFinishFragmentToListSnackFragment()
             )
-            viewModel.textChangeSnack.value = 0
-            viewModel.textPriceSnack.value = null
-            viewModel.textTotalSnack.value = null
-            viewModel.textPaymentSnack.value = null
+            viewModel.resetValue()
             println(viewModel.listSnack.value)
         }
     }

@@ -72,7 +72,14 @@ class ListSnackViewModel : BaseListSnackViewModel(),
     }
 
     fun setCountTotalPay(){
-        textChangeSnack.value = textPaymentSnack.value!! - textPriceSnack.value!!
+        if (textPaymentSnack.value != null || textPaymentSnack.value != 0)
+            textChangeSnack.value = textPaymentSnack.value!! - textPriceSnack.value!!
+    }
+
+    fun resetValue(){
+        textChangeSnack.value = 0
+        textPriceSnack.value = null
+        textPaymentSnack.value = null
     }
 
 }

@@ -83,6 +83,7 @@ class ListSnackFragment : Fragment() {
         }
 
         binding.restock.setOnClickListener {
+            viewModel.resetValue()
             viewModel.setListSnackValue()
         }
     }

@@ -62,13 +62,14 @@ class PayDetailFragment : Fragment() {
     private fun initView() {
         binding.tvTotal.text = args.snackItem.titleSnack+" x "+args.count
         viewModel.textPriceSnack.value = args.snackItem.priceSnack!!*args.count
-        viewModel.textPaymentSnack.value = 0
+//        viewModel.textPaymentSnack.value = 0
     }
 
 
     private fun bindViewModel() {
         viewModel.textPaymentSnack.observe(viewLifecycleOwner, Observer {
-            binding.tvPayment.text = "Rp. $it"
+            if (it != null)
+                binding.tvPayment.text = "Rp. $it"
         })
 
         viewModel.textPriceSnack.observe(viewLifecycleOwner, Observer {
@@ -78,7 +79,7 @@ class PayDetailFragment : Fragment() {
         viewModel.textChangeSnack.observe(viewLifecycleOwner, Observer {
             if (it < 0)
                 Toast.makeText(context,"Kurang Bayar",Toast.LENGTH_SHORT).show()
-            else
+            else if (viewModel.textPaymentSnack.value != null)
                 findNavController().navigate(
                    PayDetailFragmentDirections.actionPayDetailFragmentToPaymentFinishFragment(args.snackItem,
                        viewModel.textTotalSnack.value!!)
@@ -108,7 +109,8 @@ class PayDetailFragment : Fragment() {
             viewModel.textPaymentSnack.value = payment
         }
         binding.btnPay.setOnClickListener {
-            viewModel.setCountTotalPay()
+            if (viewModel.textPaymentSnack.value != 0 && viewModel.textPaymentSnack.value != null)
+                viewModel.setCountTotalPay()
         }
     }
 
